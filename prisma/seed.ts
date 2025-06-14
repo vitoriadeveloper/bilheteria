@@ -1,4 +1,4 @@
-import { PrismaClient } from '@prisma/client';
+import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
@@ -7,19 +7,22 @@ async function main() {
   await prisma.movie.createMany({
     data: [
       {
-        title: 'Oppenheimer',
-        description: 'A história do criador da bomba atômica.',
+        title: "Oppenheimer",
+        description: "A história do criador da bomba atômica.",
         duration: 180,
+        price: 27.88,
       },
       {
-        title: 'Barbie',
-        description: 'Barbie embarca em uma aventura no mundo real.',
+        title: "Barbie",
+        description: "Barbie embarca em uma aventura no mundo real.",
         duration: 114,
+        price: 22.88,
       },
       {
-        title: 'Duna: Parte Dois',
-        description: 'A continuação da saga de Paul Atreides.',
+        title: "Duna: Parte Dois",
+        description: "A continuação da saga de Paul Atreides.",
         duration: 150,
+        price: 24.88,
       },
     ],
   });
@@ -49,7 +52,7 @@ async function main() {
     });
 
     // 3. Criar assentos: 3 fileiras (A, B, C), 5 assentos cada
-    const rows = ['A', 'B', 'C'];
+    const rows = ["A", "B", "C"];
     const seatCountPerRow = 5;
 
     for (const session of createdSessions) {
@@ -69,12 +72,12 @@ async function main() {
     }
   }
 
-  console.log('✅ Banco populado com filmes, sessões e assentos!');
+  console.log("✅ Banco populado com filmes, sessões e assentos!");
 }
 
 main()
   .catch((e) => {
-    console.error('Erro ao rodar o seed:', e);
+    console.error("Erro ao rodar o seed:", e);
     process.exit(1);
   })
   .finally(async () => {
