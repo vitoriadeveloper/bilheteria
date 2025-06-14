@@ -5,3 +5,14 @@ export type MovieWithSessionsAndSeats = Movie & {
     seats: Seat[];
   })[];
 };
+
+
+export type SeatWithReservation = Seat & {
+  Reservation: {
+    id: string;
+    userId: string;
+    seatId: string;
+    expiresAt: Date;
+    confirmed: boolean;
+  } | null;
+};
