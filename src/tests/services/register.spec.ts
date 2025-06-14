@@ -2,14 +2,18 @@ import { InMemoryUsersRepository } from "@/repository/in-memory/in-memory-users-
 import { UserAlreadyExistsError } from "@/services/errors/user-already-exists";
 import { RegisterService } from "@/services/register";
 import { compare } from "bcryptjs";
-import { it, describe, expect } from "vitest";
+import { it, describe, expect, beforeEach } from "vitest";
+
+let inMemoryUsersRepository: InMemoryUsersRepository;
+let sut: RegisterService;
 
 describe("Register Service", () => {
+  beforeEach(() => {
+    inMemoryUsersRepository = new InMemoryUsersRepository();
+    sut = new RegisterService(inMemoryUsersRepository);
+  });
   it("O usuário deve ser cadastrado", async () => {
-    const inMemoryUsersRepository = new InMemoryUsersRepository();
-    const registerService = new RegisterService(inMemoryUsersRepository);
-
-    const { user } = await registerService.execute({
+    const { user } = await sut.execute({
       email: "johndoe@gmail.com",
       password: "123456",
     });
@@ -17,10 +21,7 @@ describe("Register Service", () => {
     expect(user.id).toEqual(expect.any(String));
   });
   it("Deve ser gerado um hash da senha do usuário cadastrado", async () => {
-    const inMemoryUsersRepository = new InMemoryUsersRepository();
-    const registerService = new RegisterService(inMemoryUsersRepository);
-
-    const { user } = await registerService.execute({
+    const { user } = await sut.execute({
       email: "johndoe@gmail.com",
       password: "123456",
     });
@@ -31,16 +32,13 @@ describe("Register Service", () => {
   });
 
   it("Não deve ser criado um usuário com o mesmo e-mail", async () => {
-    const inMemoryUsersRepository = new InMemoryUsersRepository();
-    const registerService = new RegisterService(inMemoryUsersRepository);
-
-    await registerService.execute({
+    await sut.execute({
       email: "johndoe@gmail.com",
       password: "123456",
     });
 
     expect(async () => {
-      await registerService.execute({
+      await sut.execute({
         email: "johndoe@gmail.com",
         password: "123456",
       });

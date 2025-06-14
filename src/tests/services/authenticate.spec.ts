@@ -2,13 +2,16 @@ import { InMemoryUsersRepository } from "@/repository/in-memory/in-memory-users-
 import { AuthenticateService } from "@/services/authenticate";
 import { InvalidCredentialsError } from "@/services/errors/invalid-credentials-error";
 import { hash } from "bcryptjs";
-import { it, describe, expect } from "vitest";
+import { it, describe, expect, beforeEach } from "vitest";
 
+let inMemoryUsersRepository: InMemoryUsersRepository;
+let sut: AuthenticateService;
 describe("Authenticate Service", () => {
+  beforeEach(() => {
+    inMemoryUsersRepository = new InMemoryUsersRepository();
+    sut = new AuthenticateService(inMemoryUsersRepository);
+  });
   it("O usuário deve se autenticar", async () => {
-    const inMemoryUsersRepository = new InMemoryUsersRepository();
-    const sut = new AuthenticateService(inMemoryUsersRepository);
-
     await inMemoryUsersRepository.create({
       email: "johndoe@gmail.com",
       password: await hash("123456", 6),
