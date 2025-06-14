@@ -21,6 +21,7 @@ model Movie {
   title       String
   description String
   duration    Int
+  price       Float
   Session     Session[]
 
   @@map("movies")
