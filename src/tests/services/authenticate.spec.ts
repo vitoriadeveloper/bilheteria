@@ -1,6 +1,6 @@
 import { InMemoryUsersRepository } from "@/repository/in-memory/in-memory-users-repository";
 import { AuthenticateService } from "@/services/authenticate";
-import { InvalidCredentialsError } from "@/services/errors/invalid-credentials-error";
+import { InvalidCredentialsError } from "@/services/errors/invalid-credentials";
 import { hash } from "bcryptjs";
 import { it, describe, expect, beforeEach } from "vitest";
 

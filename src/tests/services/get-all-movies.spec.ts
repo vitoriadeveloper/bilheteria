@@ -24,6 +24,7 @@ describe("Get all movies service", () => {
         title: "Matrix",
         description: "Um hacker descobre a verdade.",
         duration: 136,
+        price: 22.90,
         Session: [],
       },
       {
@@ -31,6 +32,7 @@ describe("Get all movies service", () => {
         title: "Inception",
         description: "Um sonho dentro de um sonho.",
         duration: 148,
+        price: 22.90,
         Session: [],
       }
     );
