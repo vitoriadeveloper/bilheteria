@@ -1,6 +1,6 @@
 import { FastifyReply, FastifyRequest } from "fastify";
 import { makeGetAllMoviesService } from "@/services/factories/make-get-all-movies-service";
-import { MoviesNotFound } from "@/services/errors/movies-not-found";
+import { MoviesNotFoundError } from "@/services/errors/movies-not-found";
 
 export async function getAllMovies(_: FastifyRequest, res: FastifyReply) {
   try {
@@ -9,7 +9,7 @@ export async function getAllMovies(_: FastifyRequest, res: FastifyReply) {
 
     return res.status(200).send(movies);
   } catch (err) {
-    if (err instanceof MoviesNotFound) {
+    if (err instanceof MoviesNotFoundError) {
       return res.status(404).send({ message: err.message });
     }
     return res.status(500).send();
