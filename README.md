@@ -3,7 +3,7 @@
  - [] Deve ser possível visualizar os filmes disponíveis
  - [] Deve ser possível visualizar as cadeiras disponíveis do filme selecionado
  - [x] Deve ser possível se cadastrar
- - [] Deve ser possível se autenticar
+ - [x] Deve ser possível se autenticar
  - [] Deve ser possível reservar uma sessão
  - [] Deve ser possível cancelar uma reserva
  - [] Deve ser possível comprar uma sessão

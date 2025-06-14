@@ -8,7 +8,8 @@
     "build": "tsup src --out-dir build",
     "dev": "tsx watch src/server.ts",
     "test": "vitest",
-    "coverage": "vitest run --coverage"
+    "coverage": "vitest run --coverage",
+    "seed": "ts-node prisma/seed.ts"
   },
   "keywords": [],
   "author": "",
@@ -17,6 +18,7 @@
     "@types/bcryptjs": "^3.0.0",
     "@types/node": "^24.0.1",
     "prisma": "^6.9.0",
+    "ts-node": "^10.9.2",
     "tsup": "^8.5.0",
     "tsx": "^4.20.3",
     "typescript": "^5.8.3",
