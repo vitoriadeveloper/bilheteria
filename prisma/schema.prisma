@@ -1,0 +1,63 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+model User {
+  id          String        @id @default(uuid())
+  email       String        @unique
+  password    String
+  Reservation Reservation[]
+
+  @@map("users")
+}
+
+model Movie {
+  id          String    @id @default(uuid())
+  title       String
+  description String
+  duration    Int
+  Session     Session[]
+
+  @@map("movies")
+}
+
+model Session {
+  id       String   @id @default(uuid())
+  movieId  String
+  datetime DateTime
+  movie    Movie    @relation(fields: [movieId], references: [id])
+  seats    Seat[]
+
+  @@map("sessions")
+}
+
+model Seat {
+  id          String       @id @default(uuid())
+  row         String
+  number      Int
+  sessionId   String
+  session     Session      @relation(fields: [sessionId], references: [id])
+  Reservation Reservation?
+
+  @@unique([row, number, sessionId])
+  @@map("seats")
+}
+
+model Reservation {
+  id        String   @id @default(uuid())
+  userId    String
+  seatId    String   @unique
+  expiresAt DateTime
+  confirmed Boolean  @default(false)
+
+  user User @relation(fields: [userId], references: [id])
+  seat Seat @relation(fields: [seatId], references: [id])
+
+  @@map("reservations")
+}
