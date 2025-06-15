@@ -4,6 +4,7 @@ import { UserNotFoundError } from "@/services/errors/user-not-found";
 import { SeatAlreadyReservedError } from "@/services/errors/seat-already-reserved";
 import { makeReservationService } from "@/services/factories/make-reservation-service";
 import { z } from "zod";
+import { InvalidCredentialsError } from "@/services/errors/invalid-credentials";
 
 export const reserveSeatBodySchema = z.object({
   sessionId: z.string().uuid(),
@@ -18,7 +19,7 @@ export async function reserveSeatController(
     const { sessionId, seatId } = reserveSeatBodySchema.parse(req.body);
     const userId = (req as any).user?.sub;
     if (!userId) {
-      return res.status(401).send({ message: "Usuário não autenticado" });
+      throw new InvalidCredentialsError();
     }
 
     const reserveSeatService = makeReservationService();

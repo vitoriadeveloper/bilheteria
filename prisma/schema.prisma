@@ -12,6 +12,7 @@ model User {
   email       String        @unique
   password    String
   Reservation Reservation[]
+  Cart        Cart[]
 
   @@map("users")
 }
@@ -60,4 +61,26 @@ model Reservation {
   seat Seat @relation(fields: [seatId], references: [id])
 
   @@map("reservations")
+}
+
+model Product {
+  id       String @id @default(uuid())
+  name     String
+  price    Float
+  quantity Int
+  Cart     Cart[]
+
+  @@map("products")
+}
+
+model Cart {
+  id        String  @id @default(uuid())
+  userId    String
+  productId String
+  quantity  Int
+  user      User    @relation(fields: [userId], references: [id])
+  product   Product @relation(fields: [productId], references: [id])
+
+  @@unique([userId, productId])
+  @@map("carts")
 }

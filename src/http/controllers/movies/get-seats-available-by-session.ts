@@ -1,6 +1,6 @@
 import { FastifyReply, FastifyRequest } from "fastify";
 import { MoviesNotFoundError } from "@/services/errors/movies-not-found";
-import { makeGetAvailableSeatsService } from "@/services/factories/make-get-available-seats";
+import { makeGetAvailableSeatsService } from "@/services/factories/make-get-available-seats-service";
 import z from "zod";
 
 const paramsSchema = z.object({

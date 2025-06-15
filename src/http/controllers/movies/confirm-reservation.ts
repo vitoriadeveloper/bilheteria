@@ -1,10 +1,11 @@
 import { FastifyReply, FastifyRequest } from "fastify";
 import { z } from "zod";
 import { ReservationNotFoundError } from "@/services/errors/reservation-not-found";
-import { makeConfirmReservationService } from "@/services/factories/make-confirm-reservation";
-import { AccessDeniedError } from "@/services/errors/access denied";
+import { AccessDeniedError } from "@/services/errors/access-denied";
 import { ReservationAlreadyConfirmed } from "@/services/errors/reservation-already-confirmed";
 import { ReservationExpiredError } from "@/services/errors/reservation-expired";
+import { makeConfirmReservationService } from "@/services/factories/make-confirm-reservation-service";
+import { InvalidCredentialsError } from "@/services/errors/invalid-credentials";
 
 export const confirmReserveSeatBodySchema = z.object({
   reservationId: z.string().uuid(),
@@ -18,7 +19,7 @@ export async function confirmReservationSeatController(
     const { reservationId } = confirmReserveSeatBodySchema.parse(req.body);
     const userId = (req as any).user?.sub;
     if (!userId) {
-      return res.status(401).send({ message: "Usuário não autenticado" });
+      throw new InvalidCredentialsError();
     }
 
     const confirmReservationSeatService = makeConfirmReservationService();
