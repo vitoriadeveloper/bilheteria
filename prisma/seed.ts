@@ -34,26 +34,32 @@ async function main() {
       {
         name: "Pipoca Média",
         price: 15.0,
+        quantity: 100
       },
       {
         name: "Pipoca Grande",
         price: 20.0,
+        quantity: 100
       },
       {
         name: "Refrigerante 500ml",
         price: 10.0,
+        quantity: 100
       },
       {
         name: "Chocolate",
         price: 8.0,
+        quantity: 100
       },
       {
         name: "Água",
         price: 5.0,
+        quantity: 100
       },
       {
         name: "Fini Tubo",
         price: 8.0,
+        quantity: 100
       },
     ],
   });

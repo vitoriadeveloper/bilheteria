@@ -11,11 +11,11 @@ import { getAllProducts } from "./controllers/products/get";
 
 export async function appRoutes(app: FastifyInstance) {
   app.get("/sessoes", getAllMovies);
+  app.get("/produtos", getAllProducts);
   app.get("/sessoes/:sessionId/assentos-disponiveis", getSeatsAvailableBySession);
   app.post("/usuarios", register);
   app.post("/login", authenticate);
   app.post("/reservas", { preHandler: [jwtVerify] }, reserveSeatController);
   app.delete("/reservas", { preHandler: [jwtVerify] }, deleteReservationSeatController);
   app.post("/reservas/confirmar", { preHandler: [jwtVerify] }, confirmReservationSeatController);
-  app.get("/produtos", { preHandler: [jwtVerify] }, getAllProducts);
 }
