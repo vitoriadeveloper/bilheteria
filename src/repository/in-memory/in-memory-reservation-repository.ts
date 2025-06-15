@@ -24,4 +24,8 @@ export class InMemoryReservationRepository implements ReservationsRepository {
 
     return reservation;
   }
+
+  async delete(reservationId: string) {
+    this.reservations.filter((reservation) => reservation.id !== reservationId);
+  }
 }
