@@ -10,6 +10,7 @@ import { getSeatsAvailableBySession } from "./controllers/movies/get-seats-avail
 import { getAllProducts } from "./controllers/products/get";
 import { addToCart } from "./controllers/cart/create";
 import { getUserCart } from "./controllers/cart/get-user-cart";
+import { deleteCartItem } from "./controllers/cart/delete-item";
 
 export async function appRoutes(app: FastifyInstance) {
   app.get("/sessoes", getAllMovies);
@@ -37,4 +38,5 @@ export async function appRoutes(app: FastifyInstance) {
 
   app.post("/carrinho", { preHandler: [jwtVerify] }, addToCart);
   app.get("/carrinho", { preHandler: [jwtVerify] }, getUserCart);
+  app.delete("/carrinho", { preHandler: [jwtVerify] }, deleteCartItem);
 }
