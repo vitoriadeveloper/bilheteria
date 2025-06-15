@@ -7,6 +7,7 @@ import { deleteReservationSeatController } from "./controllers/movies/delete-res
 import { getAllMovies } from "./controllers/movies/getAll";
 import { confirmReservationSeatController } from "./controllers/movies/confirm-reservation";
 import { getSeatsAvailableBySession } from "./controllers/movies/get-seats-available-by-session";
+import { getAllProducts } from "./controllers/products/get";
 
 export async function appRoutes(app: FastifyInstance) {
   app.get("/sessoes", getAllMovies);
@@ -16,4 +17,5 @@ export async function appRoutes(app: FastifyInstance) {
   app.post("/reservas", { preHandler: [jwtVerify] }, reserveSeatController);
   app.delete("/reservas", { preHandler: [jwtVerify] }, deleteReservationSeatController);
   app.post("/reservas/confirmar", { preHandler: [jwtVerify] }, confirmReservationSeatController);
+  app.get("/produtos", { preHandler: [jwtVerify] }, getAllProducts);
 }
