@@ -1,6 +1,7 @@
 import { randomUUID } from "node:crypto";
 import { ReservationsRepository } from "../reservation-repository";
 import { Prisma, Reservation } from "@prisma/client";
+import { ReservationNotFoundError } from "@/services/errors/reservation-not-found";
 
 export class InMemoryReservationRepository implements ReservationsRepository {
   public reservations: Reservation[] = [];
@@ -29,5 +30,22 @@ export class InMemoryReservationRepository implements ReservationsRepository {
     this.reservations = this.reservations.filter(
       (reservation) => reservation.id !== reservationId
     );
+  }
+
+  async confirm(reservationId: string) {
+    const index = this.reservations.findIndex((r) => r.id === reservationId);
+
+    if (index === -1) {
+      throw new ReservationNotFoundError();
+    }
+
+    const updatedReservation = {
+      ...this.reservations[index],
+      confirmed: true,
+    };
+
+    this.reservations[index] = updatedReservation;
+
+    return updatedReservation;
   }
 }

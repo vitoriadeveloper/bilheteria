@@ -22,4 +22,13 @@ export class PrismaReservationRepository implements ReservationsRepository {
       where: { id: reservationId },
     });
   }
+
+  async confirm(reservationId: string) {
+    const reservation = await prisma.reservation.update({
+      where: { id: reservationId },
+      data: { confirmed: true },
+    });
+
+    return reservation;
+  }
 }
