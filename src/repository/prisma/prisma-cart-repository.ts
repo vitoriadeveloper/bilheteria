@@ -13,13 +13,6 @@ export class PrismaCartRepository implements CartRepository {
     });
     return cart;
   }
-  async update(id: string, data: Prisma.CartUpdateInput) {
-    const cart = await prisma.cart.update({
-      where: { id },
-      data,
-    });
-    return cart;
-  }
   async delete(id: string) {
     await prisma.cart.delete({
       where: { id },

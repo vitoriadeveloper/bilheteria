@@ -19,19 +19,6 @@ export class InMemoryCartRepository implements CartRepository {
   async getByUserId(userId: string) {
     return this.carts.filter((item) => item.userId === userId);
   }
-  async update(id: string, data: Prisma.CartUpdateInput) {
-    const index = this.carts.findIndex((item) => item.id === id);
-    if (index === -1) {
-      throw new CartItemNotFoundError();
-    }
-    const existing = this.carts[index];
-    const updated = {
-      ...existing,
-      ...data,
-    } as Cart;
-    this.carts[index] = updated;
-    return updated;
-  }
   async delete(id: string) {
     const index = this.carts.findIndex((item) => item.id === id);
     if (index === -1) {
