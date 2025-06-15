@@ -28,8 +28,36 @@ async function main() {
   });
 
   const allMovies = await prisma.movie.findMany();
-
-  // 2. Criar sessões + assentos para cada filme
+  // 2. Criar produtos adicionais
+  await prisma.product.createMany({
+    data: [
+      {
+        name: "Pipoca Média",
+        price: 15.0,
+      },
+      {
+        name: "Pipoca Grande",
+        price: 20.0,
+      },
+      {
+        name: "Refrigerante 500ml",
+        price: 10.0,
+      },
+      {
+        name: "Chocolate",
+        price: 8.0,
+      },
+      {
+        name: "Água",
+        price: 5.0,
+      },
+      {
+        name: "Fini Tubo",
+        price: 8.0,
+      },
+    ],
+  });
+  // 3. Criar sessões + assentos para cada filme
   for (const movie of allMovies) {
     const sessions = await prisma.session.createMany({
       data: [
@@ -51,7 +79,7 @@ async function main() {
       },
     });
 
-    // 3. Criar assentos: 3 fileiras (A, B, C), 5 assentos cada
+    // 4. Criar assentos: 3 fileiras (A, B, C), 5 assentos cada
     const rows = ["A", "B", "C"];
     const seatCountPerRow = 5;
 

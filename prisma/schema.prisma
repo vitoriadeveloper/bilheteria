@@ -61,3 +61,11 @@ model Reservation {
 
   @@map("reservations")
 }
+
+model Product {
+  id    String @id @default(uuid())
+  name  String
+  price Float
+
+  @@map("products")
+}
