@@ -1,5 +1,6 @@
 import { ReservationsRepository } from "@/repository/reservation-repository";
 import { ReservationNotFoundError } from "./errors/reservation-not-found";
+import { ReservationAlreadyConfirmed } from "./errors/reservation-already-confirmed";
 
 interface DeleteReservationSeatServiceRequest {
   reservationId: string;
@@ -17,6 +18,9 @@ export class DeleteReservationSeatService {
 
     if (!reservation) {
       throw new ReservationNotFoundError();
+    }
+    if (reservation.confirmed) {
+      throw new ReservationAlreadyConfirmed();
     }
 
     await this.reservationsRepository.delete(reservationId);
