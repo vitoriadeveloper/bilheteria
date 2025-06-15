@@ -1,6 +1,6 @@
 import { ReservationsRepository } from "@/repository/reservation-repository";
 import { ReservationNotFoundError } from "./errors/reservation-not-found";
-import { AccessDeniedError } from "./errors/access denied";
+import { AccessDeniedError } from "./errors/access-denied";
 import { ReservationAlreadyConfirmed } from "./errors/reservation-already-confirmed";
 import { ReservationExpiredError } from "./errors/reservation-expired";
 

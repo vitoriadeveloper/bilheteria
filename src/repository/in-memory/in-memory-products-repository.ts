@@ -6,4 +6,13 @@ export class InMemoryProductsRepository implements ProductsRepository {
   async get() {
     return this.products;
   }
+
+  async findById(id: string) {
+    const product = this.products.find((item) => item.id === id);
+
+    if (!product) {
+      return null;
+    }
+    return product;
+  }
 }
