@@ -1,10 +1,10 @@
 import { FastifyReply, FastifyRequest } from "fastify";
 import { z } from "zod";
 import { ReservationNotFoundError } from "@/services/errors/reservation-not-found";
-import { makeConfirmReservationService } from "@/services/factories/make-confirm-reservation";
 import { AccessDeniedError } from "@/services/errors/access denied";
 import { ReservationAlreadyConfirmed } from "@/services/errors/reservation-already-confirmed";
 import { ReservationExpiredError } from "@/services/errors/reservation-expired";
+import { makeConfirmReservationService } from "@/services/factories/make-confirm-reservation-service";
 
 export const confirmReserveSeatBodySchema = z.object({
   reservationId: z.string().uuid(),
