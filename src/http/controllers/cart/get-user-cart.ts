@@ -1,3 +1,4 @@
+import { CartItemNotFoundError } from "@/services/errors/cart-item-not-found";
 import { InvalidCredentialsError } from "@/services/errors/invalid-credentials";
 import { UserNotFoundError } from "@/services/errors/user-not-found";
 import { makeUserCartService } from "@/services/factories/make-get-user-cart";
@@ -15,6 +16,9 @@ export async function getUserCart(req: FastifyRequest, res: FastifyReply) {
   } catch (error) {
     if (error instanceof InvalidCredentialsError) {
       return res.status(401).send({ message: error.message });
+    }
+    if (error instanceof CartItemNotFoundError) {
+      return res.status(404).send({ message: error.message });
     }
     if (error instanceof UserNotFoundError) {
       return res.status(404).send({ message: error.message });

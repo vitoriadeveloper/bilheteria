@@ -65,7 +65,7 @@ describe("Get all available seats by session service", () => {
         userId: "user-1",
         seatId: "qualquer",
         confirmed: true,
-        expiresAt: new Date(Date.now() + 1000 * 60), // ainda válida
+        expiresAt: new Date(Date.now() + 1000 * 60), 
       },
     };
     inMemoryAvailableRepository.seats.push(seat);
