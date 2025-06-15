@@ -5,7 +5,7 @@
  - [x] Deve ser possível se cadastrar
  - [x] Deve ser possível se autenticar
  - [x] Deve ser possível reservar uma sessão
- - [] Deve ser possível cancelar uma reserva
+ - [x] Deve ser possível cancelar uma reserva
  - [] Deve ser possível comprar uma sessão
  - [] Deve ser possível visualizar as cadeiras do filme selecionado
   
