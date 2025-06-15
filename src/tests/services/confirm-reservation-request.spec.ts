@@ -1,6 +1,6 @@
 import { InMemoryReservationRepository } from "@/repository/in-memory/in-memory-reservation-repository";
 import { ConfirmReserveSeatService } from "@/services/confirm-reservation-request";
-import { AccessDeniedError } from "@/services/errors/access denied";
+import { AccessDeniedError } from "@/services/errors/access-denied";
 import { ReservationExpiredError } from "@/services/errors/reservation-expired";
 import { ReservationNotFoundError } from "@/services/errors/reservation-not-found";
 import { randomUUID } from "crypto";
