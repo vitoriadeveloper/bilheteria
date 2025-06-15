@@ -1,3 +1,4 @@
+import { InvalidCredentialsError } from "@/services/errors/invalid-credentials";
 import { ProductNotFoundError } from "@/services/errors/product-not-found";
 import { UserNotFoundError } from "@/services/errors/user-not-found";
 import { makeCreateCartService } from "@/services/factories/make-create-cart-service";
@@ -12,7 +13,7 @@ export async function addToCart(req: FastifyRequest, res: FastifyReply) {
   const { productId, quantity } = schema.parse(req.body);
   const userId = (req as any).user?.sub;
   if (!userId) {
-    return res.status(401).send({ message: "Usuário não autenticado" });
+    throw new InvalidCredentialsError();
   }
   try {
     const createCartService = makeCreateCartService();
