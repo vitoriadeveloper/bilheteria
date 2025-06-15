@@ -1,13 +1,19 @@
 import { FastifyInstance } from "fastify";
 import { register } from "./controllers/users/register";
 import { authenticate } from "./controllers/users/authenticate";
-import { getAllMovies } from "./controllers/movies/getAll";
 import { reserveSeatController } from "./controllers/movies/reservation";
 import { jwtVerify } from "./middleware/jwt-verify";
+import { deleteReservationSeatController } from "./controllers/movies/delete-reservation";
+import { getAllMovies } from "./controllers/movies/getAll";
+import { confirmReservationSeatController } from "./controllers/movies/confirm-reservation";
+import { getSeatsAvailableBySession } from "./controllers/movies/get-seats-available-by-session";
 
 export async function appRoutes(app: FastifyInstance) {
-  app.get("/filmes", getAllMovies);
+  app.get("/sessoes", getAllMovies);
+  app.get("/sessoes/:sessionId/assentos-disponiveis", getSeatsAvailableBySession);
   app.post("/usuarios", register);
   app.post("/login", authenticate);
   app.post("/reservas", { preHandler: [jwtVerify] }, reserveSeatController);
+  app.delete("/reservas", { preHandler: [jwtVerify] }, deleteReservationSeatController);
+  app.post("/reservas/confirmar", { preHandler: [jwtVerify] }, confirmReservationSeatController);
 }

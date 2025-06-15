@@ -16,4 +16,19 @@ export class PrismaReservationRepository implements ReservationsRepository {
 
     return reservation;
   }
+
+  async delete(reservationId: string) {
+    await prisma.reservation.delete({
+      where: { id: reservationId },
+    });
+  }
+
+  async confirm(reservationId: string) {
+    const reservation = await prisma.reservation.update({
+      where: { id: reservationId },
+      data: { confirmed: true },
+    });
+
+    return reservation;
+  }
 }
