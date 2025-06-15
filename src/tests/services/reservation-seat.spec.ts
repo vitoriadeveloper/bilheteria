@@ -111,4 +111,38 @@ describe("Reservation seat service", () => {
       })
     ).rejects.toBeInstanceOf(SeatAlreadyReservedError);
   });
+    it("Deve definir expiresAt com 15 minutos após a criação", async () => {
+    const user = await inMemoryUsersRepository.create({
+      id: "user-15min",
+      email: "test@example.com",
+      password: "123456",
+    });
+
+    const seat = {
+      id: "seat-15min",
+      row: "A",
+      number: 1,
+      sessionId: "session-15min",
+      Reservation: null,
+    };
+
+    inMemorySeatRepository.seats.push(seat);
+
+    const before = Date.now();
+    const { reservation } = await sut.execute({
+      userId: user.id,
+      seatId: seat.id,
+      sessionId: seat.sessionId,
+    });
+    const after = Date.now();
+
+    const expectedMin = before + 15 * 60 * 1000;
+    const expectedMax = after + 15 * 60 * 1000;
+
+    const actual = reservation.expiresAt.getTime();
+
+    expect(actual).toBeGreaterThanOrEqual(expectedMin);
+    expect(actual).toBeLessThanOrEqual(expectedMax);
+  });
+
 });
