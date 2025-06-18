@@ -15,6 +15,7 @@
   - [Erros comuns](#erros-comuns)
   - [Requisitos funcionais](#requisitos-funcionais)
   - [Requisitos de negócio](#requisitos-de-negócio)
+  - [Arquitetura proposta](#arquitetura-proposta)
  ## Tecnologias
 * Node.js
 * Typescript
@@ -344,3 +345,6 @@ Authorization: Bearer <token>
  - [x] Deve ser possível visualizar as cadeiras e fileiras disponíveis da sessão sem precisar estar cadastrado
  - [x] Deve ser possível visualizar produtos como pipoca, refrigerante sem estar autenticado
  - [x] Para compras de produtos como pipoca, refrigerante, o usuário deve estar autenticado
+
+## Arquitetura proposta 
+<img src="src/assets/architecture.png" alt="imagem de arquitetura no draw.io utilizando aws">
